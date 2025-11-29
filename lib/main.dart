@@ -94,7 +94,7 @@ class _PrinterHomePageState extends State<PrinterHomePage> {
       final bonded = await bluetooth.getBondedDevices();
       final match = bonded.firstWhere(
         (d) => (d.address ?? '') == lastAddr,
-        orElse: () => BluetoothDevice(),
+        orElse: () => BluetoothDevice(null, null),
       );
 
       if ((match.address ?? '').isNotEmpty) {
@@ -257,7 +257,7 @@ class _PrinterHomePageState extends State<PrinterHomePage> {
       bytes += generator.hr(ch: '=', linesAfter: 1);
 
       bytes += generator.qrcode('https://example.com/order/12345',
-          size: QRSize.size4, align: PosAlign.center);
+          size: QRSize.Size4, align: PosAlign.center);
       bytes += generator.text('Thank you!', styles: const PosStyles(align: PosAlign.center));
       bytes += generator.feed(2);
       bytes += generator.cut();
